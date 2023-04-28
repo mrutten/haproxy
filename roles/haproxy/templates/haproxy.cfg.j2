@@ -1,0 +1,20 @@
+global
+    #debug
+
+defaults
+    mode    tcp
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+        
+frontend kubernetes
+    bind {{ virtual_ipaddress }}:80
+    option tcplog
+    mode tcp
+    default_backend kubernetes-master-nodes
+
+backend kubernetes-master-nodes
+    mode tcp
+    balance roundrobin
+    option tcp-check
+    server vm-debian11-web-01 192.168.2.14:80 check fall 3 rise 2

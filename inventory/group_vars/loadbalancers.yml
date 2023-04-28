@@ -1,0 +1,4 @@
+---
+vrrp_instance: VI_1
+interface: eth0
+virtual_router_id: 10

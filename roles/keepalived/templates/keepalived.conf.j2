@@ -1,0 +1,9 @@
+vrrp_instance {{ vrrp_instance }} {
+    state {{ state }}
+    interface {{ interface }}
+    virtual_router_id {{ virtual_router_id }}
+    priority {{ priority }}
+    virtual_ipaddress {
+        {{ virtual_ipaddress }}
+    }
+}
