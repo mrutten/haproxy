@@ -14,6 +14,7 @@ vm-ubuntu22-lbl-02 ansible_host=192.168.2.13
 
 [web]
 vm-debian11-web-01 ansible_host=192.168.2.14
+vm-debian11-web-02 ansible_host=192.168.2.15
 
 [loadbalancers:children]
 masters

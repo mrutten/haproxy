@@ -1,20 +1,18 @@
-global
-    #debug
-
 defaults
-    mode    tcp
-    timeout connect 5000
-    timeout client  50000
-    timeout server  50000
+    mode {{ default_mode }}
+    log {{ default_log }}
+    option {{ default_option }}
+    timeout connect {{ default_timeout_connect }}
+    timeout client {{ default_timeout_client }}
+    timeout server {{ default_timeout_server }}
         
-frontend kubernetes
-    bind {{ virtual_ipaddress }}:80
-    option tcplog
-    mode tcp
-    default_backend kubernetes-master-nodes
+frontend {{ frontend_name }}
+    bind {{ virtual_ipaddress }}:{{ frontend_port }}
+    use_backend {{ backend_name }}
 
-backend kubernetes-master-nodes
-    mode tcp
-    balance roundrobin
-    option tcp-check
-    server vm-debian11-web-01 192.168.2.14:80 check fall 3 rise 2
+backend {{ backend_name }}
+    balance {{ backend_balance }}
+    option {{ backend_option }}
+{% for server in servers %}
+    server {{ server.name }} {{ server.ip }}:{{ server.port }} check inter {{ server.inter }} fall {{ server.fall }} rise {{ server.rise }}
+{% endfor %}

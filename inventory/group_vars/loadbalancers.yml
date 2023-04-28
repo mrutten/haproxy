@@ -2,3 +2,36 @@
 vrrp_instance: VI_1
 interface: eth0
 virtual_router_id: 10
+
+
+default_mode: tcp
+default_log: global
+default_option: tcplog
+default_timeout_connect: 5000
+default_timeout_client: 50000
+default_timeout_server: 50000
+
+frontend_name: frontend
+frontend_port: 80
+
+backend_name: webservers
+# https://docs.haproxy.org/2.7/configuration.html#balance
+backend_balance: leastconn
+backend_option: tcp-check
+
+# inter: healthcheck interval, defaults to 2
+# fall: how many failed checks are allowed
+# rise: how many passed checks before returning previously failed server to rotation
+servers:
+  - name: vm-debian11-web-01
+    ip : 192.168.2.14
+    port: 80
+    inter: 2
+    fall: 3
+    rise: 2
+  - name: vm-debian11-web-02
+    ip : 192.168.2.15
+    port: 80
+    inter: 2
+    fall: 3
+    rise: 2
