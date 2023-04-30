@@ -1,41 +1,9 @@
 [masters]
-vm-centos9-lbl-01 ansible_host=192.168.2.4
-vm-debian11-lbl-01 ansible_host=192.168.2.6
-vm-suse15-lbl-01 ansible_host=192.168.2.8
-vm-rhel9-lbl-01 ansible_host=192.168.2.10
-vm-ubuntu22-lbl-01 ansible_host=192.168.2.12
+lbl-01 ansible_host=192.168.2.5
 
 [backups]
-vm-centos9-lbl-02 ansible_host=192.168.2.5
-vm-debian11-lbl-02 ansible_host=192.168.2.7
-vm-suse15-lbl-02 ansible_host=192.168.2.9
-vm-rhel9-lbl-02 ansible_host=192.168.2.11
-vm-ubuntu22-lbl-02 ansible_host=192.168.2.13
-
-[web]
-vm-debian11-web-01 ansible_host=192.168.2.14
-vm-debian11-web-02 ansible_host=192.168.2.15
+lbl-02 ansible_host=192.168.2.6
 
 [loadbalancers:children]
 masters
 backups
-
-[centos9]
-vm-centos9-lbl-01
-vm-centos9-lbl-02
-
-[debian11]
-vm-debian11-lbl-01
-vm-debian11-lbl-02
-
-[suse15]
-vm-suse15-lbl-01
-vm-suse15-lbl-02
-
-[rhel9]
-vm-rhel9-lbl-01
-vm-rhel9-lbl-02
-
-[ubuntu22]
-vm-ubuntu22-lbl-01
-vm-ubuntu22-lbl-02

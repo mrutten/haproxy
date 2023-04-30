@@ -2,7 +2,7 @@
 vrrp_instance: VI_1
 interface: eth0
 virtual_router_id: 10
-
+virtual_ipaddress: 192.168.2.4
 
 default_mode: tcp
 default_log: global
@@ -12,7 +12,7 @@ default_timeout_client: 50000
 default_timeout_server: 50000
 
 frontend_name: frontend
-frontend_port: 80
+frontend_port: 6443
 
 backend_name: webservers
 # https://docs.haproxy.org/2.7/configuration.html#balance
@@ -23,15 +23,21 @@ backend_option: tcp-check
 # fall: how many failed checks are allowed
 # rise: how many passed checks before returning previously failed server to rotation
 servers:
-  - name: vm-debian11-web-01
-    ip : 192.168.2.14
-    port: 80
+  - name: k8smaster-01
+    ip : 192.168.2.7
+    port: 6443
     inter: 2
     fall: 3
     rise: 2
-  - name: vm-debian11-web-02
-    ip : 192.168.2.15
-    port: 80
+  - name: k8smaster-02
+    ip : 192.168.2.8
+    port: 6443
+    inter: 2
+    fall: 3
+    rise: 2
+  - name: k8smaster-03
+    ip : 192.168.2.9
+    port: 6443
     inter: 2
     fall: 3
     rise: 2
