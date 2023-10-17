@@ -2,7 +2,7 @@
 vrrp_instance: VI_1
 interface: eth0
 virtual_router_id: 10
-virtual_ipaddress: 192.168.2.4
+virtual_ipaddress: 10.0.10.7
 
 default_mode: tcp
 default_log: global
@@ -23,20 +23,20 @@ backend_option: tcp-check
 # fall: how many failed checks are allowed
 # rise: how many passed checks before returning previously failed server to rotation
 servers:
-  - name: k8smaster-01
-    ip : 192.168.2.7
+  - name: k8smaster01
+    ip : 10.0.10.8
     port: 6443
     inter: 2
     fall: 3
     rise: 2
-  - name: k8smaster-02
-    ip : 192.168.2.8
+  - name: k8smaster02
+    ip : 10.0.10.9
     port: 6443
     inter: 2
     fall: 3
     rise: 2
-  - name: k8smaster-03
-    ip : 192.168.2.9
+  - name: k8smaster03
+    ip : 10.0.10.10
     port: 6443
     inter: 2
     fall: 3
