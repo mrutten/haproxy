@@ -1,43 +1,58 @@
 ---
-vrrp_instance: VI_1
-interface: eth0
-virtual_router_id: 10
-virtual_ipaddress: 10.0.10.7
-
-default_mode: tcp
 default_log: global
-default_option: tcplog
+default_mode: http
+default_options:
+  - value: httplog
+  - value: dontlognull
 default_timeout_connect: 5000
 default_timeout_client: 50000
 default_timeout_server: 50000
 
-frontend_name: frontend
-frontend_port: 6443
+frontend_name: http
+frontend_bind:
+  - value: "*:80"
+  - value: "*:443 ssl crt /etc/ssl/certs/lb1.lab.binaryvision.nl.pem"
+frontend_mode: http
+frontend_options:
+  - value: forwardfor
 
-backend_name: webservers
-# https://docs.haproxy.org/2.7/configuration.html#balance
-backend_balance: leastconn
-backend_option: tcp-check
+setheaders:
+  - name: Strict-Transport-Security
+    value: "max-age=31536000; includeSubDomains; preload"
+  - name: Content-Security-Policy
+    value: "script-src 'self';"
+  - name: X-XSS-Protection
+    value: "1; mode=block"
+  - name: X-Frame-Options
+    value: "SAMEORIGIN"
+  - name: X-Content-Type-Options
+    value: "nosniff"
+  - name: Referrer-Policy
+    value: "strict-origin"
+  - name: Permissions-Policy
+    value: "camera=(),fullscreen=(self),geolocation=(),magnetometer=(),microphone=(),midi=(),payment=(),sync-xhr=()"
 
+delheaders:
+  - name: Server
+
+backend_name: http_pool
 # inter: healthcheck interval, defaults to 2
-# fall: how many failed checks are allowed
 # rise: how many passed checks before returning previously failed server to rotation
-servers:
-  - name: k8smaster01
-    ip : 10.0.10.8
-    port: 6443
-    inter: 2
+# fall: how many failed checks are allowed
+masterservers:
+  - name: app1
+    ip: 172.16.1.10
+    port: 80
+slaveservers:
+  - name: app2
+    ip: 172.16.1.11
+    port: 80
+    inter: 1000
     fall: 3
-    rise: 2
-  - name: k8smaster02
-    ip : 10.0.10.9
-    port: 6443
-    inter: 2
+    rise: 3
+  - name: app3
+    ip: 172.16.1.12
+    port: 80
+    inter: 1000
     fall: 3
-    rise: 2
-  - name: k8smaster03
-    ip : 10.0.10.10
-    port: 6443
-    inter: 2
-    fall: 3
-    rise: 2
+    rise: 3

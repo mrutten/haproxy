@@ -1,6 +1,0 @@
----
-- name: restart keepalived
-  ansible.builtin.systemd:
-    enabled: true
-    name: keepalived
-    state: restarted

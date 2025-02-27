@@ -14,6 +14,6 @@
     update_cache: true
   with_items:
     - haproxy
-    - keepalived
   tags:
     - installation
+

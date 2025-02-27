@@ -1,9 +1,2 @@
-[masters]
-lbl01 ansible_host=10.0.10.5
-
-[backups]
-lbl02 ansible_host=10.0.10.6
-
-[loadbalancers:children]
-masters
-backups
+[loadbalancers]
+lbl01 ansible_host=172.16.2.2
