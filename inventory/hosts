@@ -1,2 +1,2 @@
 [loadbalancers]
-lbl01 ansible_host=172.16.2.2
+lbl01
