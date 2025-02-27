@@ -42,11 +42,11 @@ frontend {{ frontend_name }}
     use_backend {{ backend_name }}
     mode {{ frontend_mode }}
 {% for option in frontend_options %}
-    option {{ option.value }}
+    option {{ option }}
 {% endfor %}
 
 {% for header in setheaders %}
-    http-response set-header {{ header.name }} {{ header.value }}
+    http-response set-header {{ header.name }} "{{ header.value }}"
 {% endfor %}
 
 {% for header in delheaders %}
