@@ -1,7 +1,8 @@
 ---
-- name: HAProxy
+- name: HAProxy configuration
   hosts: loadbalancers
   become: true
   gather_facts: true
   roles:
-    - haproxy
+    - configuration
+
