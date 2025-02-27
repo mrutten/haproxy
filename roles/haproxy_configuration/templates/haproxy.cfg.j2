@@ -58,6 +58,6 @@ backend {{ backend_name }}
     server {{ server.name }} {{ server.ip }}:{{ server.port }}
 {% endfor %}
 {% for server in slaveservers %}
-    server {{ server.name }} {{ server.ip }}:{{ server.port }} check inter {{ server.inter }} rise {{ server.rise }} fall {{ server.fall }} 
+    server {{ server.name }} {{ server.ip }}:{{ server.port }} check backup inter {{ server.inter }} rise {{ server.rise }} fall {{ server.fall }} 
 {% endfor %}
 
