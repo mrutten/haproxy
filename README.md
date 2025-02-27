@@ -1,10 +1,10 @@
-# Nagios HAproxy playbook
+# Ansible HAproxy playbook
 
 ## Table of Contents
 
 <!--toc:start-->
 
-- [Nagios HAproxy playbook](#nagios-haproxy-playbook)
+- [Ansible HAproxy playbook](#ansible-haproxy-playbook)
   - [Table of Contents](#table-of-contents)
 - [Contents](#contents)
 <!--toc:end-->
