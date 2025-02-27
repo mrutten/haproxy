@@ -54,8 +54,6 @@ frontend {{ frontend_name }}
 {% endfor %}
 
 backend {{ backend_name }}
-    balance {{ backend_balance }}
-    option {{ backend_option }}
 {% for server in masterservers %}
     server {{ server.name }} {{ server.ip }}:{{ server.port }}
 {% endfor %}
