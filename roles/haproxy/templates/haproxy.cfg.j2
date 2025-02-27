@@ -42,7 +42,7 @@ frontend {{ frontend_name }}
     use_backend {{ backend_name }}
     mode {{ frontend_mode }}
 {% for option in frontend_options %}
-    option {{ option }}
+    option {{ option.value }}
 {% endfor %}
 
 {% for header in setheaders %}
